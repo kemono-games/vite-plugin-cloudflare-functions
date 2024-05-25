@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-cloudflare-functions",
+  "name": "@nurupo/vite-plugin-cloudflare-functions",
   "version": "0.6.2",
   "description": "Make Cloudflare Pages Functions works with Vite friendly",
   "keywords": [
