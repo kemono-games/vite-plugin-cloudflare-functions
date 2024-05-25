@@ -1,19 +1,17 @@
+import { ChildProcessByStdio, spawn } from 'node:child_process'
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import { Readable } from 'node:stream'
+import colors from 'picocolors'
+import kill from 'tree-kill'
+
+import { onDeath } from '@breadc/death'
+
+import { generate } from './generate'
+import { debug, normalizePath } from './utils'
+
 import type { Plugin } from 'vite';
-
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import { type Readable } from 'node:stream';
-import { type ChildProcessByStdio, spawn } from 'node:child_process';
-
-import kill from 'tree-kill';
-import colors from 'picocolors';
-import { onDeath } from '@breadc/death';
-
 import type { UserConfig } from './types';
-
-import { generate } from './generate';
-import { normalizePath, debug } from './utils';
-
 const DefaultPort = 5173;
 const DefaultWranglerPort = 8788;
 
@@ -132,6 +130,12 @@ export function CloudflarePagesFunctions(userConfig: UserConfig = {}): Plugin {
     if (compatibilityDate) {
       command.push('--compatibility-date');
       command.push(compatibilityDate);
+    }
+
+    const compatibilityFlags = userConfig.wrangler?.compatibilityFlags;
+    if (compatibilityFlags && compatibilityFlags.length > 0) {
+      command.push('--compatibility-flags');
+      command.push(...compatibilityFlags);
     }
 
     debug(command);

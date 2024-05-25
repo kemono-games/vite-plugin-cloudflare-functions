@@ -70,5 +70,10 @@ export interface UserConfig {
      * Determines which version of the Workers runtime is used.
      */
     compatibilityDate?: string;
+
+    /**
+     * Determines which features are enabled in the Workers runtime.
+     */
+    compatibilityFlags?: string[];
   };
 }
