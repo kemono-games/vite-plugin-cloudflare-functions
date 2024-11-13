@@ -1,14 +1,14 @@
-import { ChildProcessByStdio, spawn } from 'node:child_process';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import { Readable } from 'node:stream';
-import colors from 'picocolors';
-import kill from 'tree-kill';
+import { ChildProcessByStdio, spawn } from 'node:child_process'
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import { Readable } from 'node:stream'
+import colors from 'picocolors'
+import kill from 'tree-kill'
 
-import { onDeath } from '@breadc/death';
+import { onDeath } from '@breadc/death'
 
-import { generate } from './generate';
-import { debug, normalizePath } from './utils';
+import { generate } from './generate'
+import { debug, normalizePath } from './utils'
 
 import type { Plugin } from 'vite';
 import type { UserConfig } from './types';
@@ -44,6 +44,10 @@ export function CloudflarePagesFunctions(userConfig: UserConfig = {}): Plugin {
   onDeath(async () => {
     await killProcess();
   });
+
+  if (typeof userConfig.dts !== 'boolean' && typeof userConfig.dts !== 'string') {
+    userConfig.dts = true;
+  }
 
   let shouldGen = false;
   const doAutoGen = async () => {
@@ -103,6 +107,16 @@ export function CloudflarePagesFunctions(userConfig: UserConfig = {}): Plugin {
       for (const r2 of r2s) {
         bindings.push('--r2');
         bindings.push(r2);
+      }
+    }
+    if (userConfig.wrangler?.ai) {
+      const ais = Array.isArray(userConfig.wrangler.ai)
+        ? userConfig.wrangler.ai
+        : [userConfig.wrangler.ai];
+
+      for (const ai of ais) {
+        bindings.push('--ai');
+        bindings.push(ai);
       }
     }
 

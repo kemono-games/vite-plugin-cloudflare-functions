@@ -7,21 +7,20 @@
     "dev": "vite"
   },
   "dependencies": {
-    "axios": "^1.6.8",
-    "vue": "^3.4.26"
+    "axios": "^1.7.7",
+    "vue": "^3.5.12"
   },
   "devDependencies": {
     "@onekuma/preset.css": "^0.1.11",
     "@onekuma/reset": "^0.1.11",
     "@onekuma/ui": "^0.1.11",
     "@onekuma/vite": "^0.1.11",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vueuse/core": "^10.9.0",
-    "unocss": "^0.59.4",
-    "vite": "^5.2.11",
+    "@vitejs/plugin-vue": "^5.1.5",
+    "@vueuse/core": "^11.2.0",
+    "unocss": "^0.64.0",
+    "unplugin-info": "^1.2.1",
     "vite-plugin-cloudflare-functions": "workspace:*",
-    "vite-plugin-info": "0.4.1",
-    "vite-plugin-inspect": "^0.8.4",
-    "wrangler": "^3.53.1"
+    "vite-plugin-inspect": "^0.8.7",
+    "wrangler": "^3.85.0"
   }
 }
